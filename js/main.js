@@ -235,14 +235,20 @@ function bindMenubarExtras() {
   }
 
   /* #fast in the URL skips the boot + login sequence (also handy for testing).
-     #fast&open=finder,terminal additionally opens apps. */
+     Extra flags: open=finder,terminal · light · wp=sonoma · spotlight · controlcenter */
   if (location.hash.includes("fast")) {
     $("#boot").classList.add("hidden");
     $("#lock").classList.add("hidden");
     $("#os").classList.remove("hidden");
     Power.booted = true;
-    const m = location.hash.match(/open=([\w,]+)/);
+    const h = location.hash;
+    if (h.includes("light")) applyTheme(false);
+    const wm = h.match(/wp=(\w+)/);
+    if (wm) applyWallpaper(wm[1]);
+    const m = h.match(/open=([\w,]+)/);
     if (m) setTimeout(() => m[1].split(",").forEach((id) => WM.open(id)), 250);
+    if (h.includes("spotlight")) setTimeout(() => Spotlight.toggle(), 450);
+    if (h.includes("controlcenter")) setTimeout(() => ControlCenter.toggle(), 450);
   } else {
     Power.boot();
   }
