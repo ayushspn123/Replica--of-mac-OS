@@ -1,0 +1,17 @@
+{
+  "name": "macos-web",
+  "productName": "macOS",
+  "version": "1.0.0",
+  "description": "A faithful macOS desktop experience — boot screen, dock, windows, Finder, Terminal and more — packaged as a desktop application.",
+  "main": "electron-main.cjs",
+  "author": "Ayush Kumar",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-packager . macOS --platform=win32 --arch=x64 --out=dist --overwrite --ignore=\"\\.shots\" --ignore=\"screenshots\" --ignore=\"dist\""
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.1",
+    "electron": "^42.4.0"
+  }
+}
